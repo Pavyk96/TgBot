@@ -31,6 +31,8 @@ dependencies {
 	// Spring Data JPA для работы с базой
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
+	implementation("org.springframework.boot:spring-boot-starter-web")
+
 	// Telegram Bots API
 	implementation("org.telegram:telegrambots:6.7.0")
 
