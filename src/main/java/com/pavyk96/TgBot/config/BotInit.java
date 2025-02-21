@@ -1,6 +1,6 @@
 package com.pavyk96.TgBot.config;
 
-import com.pavyk96.TgBot.service.TgBot;
+import com.pavyk96.TgBot.TgBot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
