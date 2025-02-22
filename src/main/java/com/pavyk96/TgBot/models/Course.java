@@ -24,6 +24,7 @@ public class Course {
     private String title;
     private String description;
     private String imageUrl;
+    private boolean active;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Module> modules = new ArrayList<>();
