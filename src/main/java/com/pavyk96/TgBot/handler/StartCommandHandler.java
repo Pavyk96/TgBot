@@ -1,6 +1,7 @@
 package com.pavyk96.TgBot.handler;
 
 import com.pavyk96.TgBot.utils.MessageSender;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -9,6 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @RequiredArgsConstructor
 public class StartCommandHandler implements CommandHandler{
 
+    @NonNull
     private final MessageSender messageSender;
 
     @Override

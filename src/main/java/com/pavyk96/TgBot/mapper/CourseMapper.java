@@ -7,16 +7,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class CourseMapper {
 
-    public CourseDTO toDto(Course course) {
+    public static CourseDTO toDto(Course course) {
         return CourseDTO.builder()
+                .id(course.getId())
                 .title(course.getTitle())
                 .description(course.getDescription())
                 .imageUrl(course.getImageUrl())
                 .build();
     }
 
-    public Course toModel(CourseDTO dto) {
+    public static Course toModel(CourseDTO dto) {
         return Course.builder()
+                .id(dto.getId())
                 .title(dto.getTitle())
                 .description(dto.getDescription())
                 .imageUrl(dto.getImageUrl())
