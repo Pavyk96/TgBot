@@ -52,4 +52,9 @@ public class CourseServiceImpl implements CourseService {
     public void deleteCourse(Long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public Course getCourseByTitle(String title) {
+        return repository.findByTitle(title);
+    }
 }
