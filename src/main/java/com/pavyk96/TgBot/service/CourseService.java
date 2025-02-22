@@ -16,5 +16,7 @@ public interface CourseService {
     CourseDTO saveCourse(Course course);
 
     void deleteCourse(Long id);
+
+    Course getCourseByTitle(String title);
 }
 

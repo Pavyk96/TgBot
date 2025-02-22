@@ -1,5 +1,7 @@
-package com.pavyk96.TgBot.handler;
+package com.pavyk96.TgBot.handler.impl;
 
+import com.pavyk96.TgBot.handler.CallbackHandler;
+import com.pavyk96.TgBot.handler.CommandHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
