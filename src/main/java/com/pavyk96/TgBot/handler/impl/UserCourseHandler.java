@@ -2,26 +2,30 @@ package com.pavyk96.TgBot.handler.impl;
 
 import com.pavyk96.TgBot.handler.CommandHandler;
 import com.pavyk96.TgBot.models.Course;
+import com.pavyk96.TgBot.models.User;
+import com.pavyk96.TgBot.models.UserCourse;
 import com.pavyk96.TgBot.service.CourseService;
+import com.pavyk96.TgBot.service.UserCourseService;
+import com.pavyk96.TgBot.service.UserService;
 import com.pavyk96.TgBot.utils.MessageSender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
-public class CourseInfoHandler implements CommandHandler {
+public class UserCourseHandler implements CommandHandler {
 
+    private final UserService userService;
     private final CourseService courseService;
+    private final UserCourseService userCourseService;
     private final MessageSender messageSender;
 
     @Override
     public boolean canHandle(String command) {
-        return courseService.getCourseByTitle(command) != null;
+        return command.startsWith("✅ Записаться на курс ");
     }
 
     @Override
@@ -31,22 +35,26 @@ public class CourseInfoHandler implements CommandHandler {
         }
 
         long chatId = update.getMessage().getChatId();
-        String courseTitle = update.getMessage().getText();
+        String command = update.getMessage().getText();
 
+        String courseTitle = command.replaceFirst("✅ Записаться на курс ", "");
+
+        User user = userService.getUserByChatId(chatId);
         Course course = courseService.getCourseByTitle(courseTitle);
+        userCourseService.createUserCourse(UserCourse.builder()
+                .userId(user)
+                .course(course)
+                .startDate(LocalDate.now())
+                .build());
+
+
         if (course == null) {
             messageSender.sendMessage(chatId, "Курс не найден.");
             return;
         }
 
-        String courseInfo = "*Курс:* " + course.getTitle() + "\n\n" + course.getDescription();
-
-        KeyboardRow row = new KeyboardRow();
-        row.add(new KeyboardButton("⬅ Назад к курсам"));
-        row.add(new KeyboardButton("✅ Записаться на курс " + courseTitle));
-
-        List<KeyboardRow> keyboard = List.of(row);
-
-        messageSender.sendMessageWithKeyboard(chatId, courseInfo, keyboard);
+        messageSender.sendMessage(chatId, "Вы записались на курс: " + courseTitle);
     }
+
+
 }

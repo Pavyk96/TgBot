@@ -38,19 +38,15 @@ public class CoursesCommandHandler implements CommandHandler {
             return;
         }
 
-        // Формируем список строк для кнопок
         List<KeyboardRow> keyboardRows = coursesList.stream()
                 .map(course -> {
-                    // Создаем кнопку для каждого курса
                     KeyboardButton button = new KeyboardButton(course.getTitle());
-                    // Создаем строку и добавляем в нее кнопку
                     KeyboardRow row = new KeyboardRow();
                     row.add(button);
                     return row;
                 })
                 .collect(Collectors.toList());
 
-        // Отправляем сообщение с клавиатурой
         messageSender.sendMessageWithKeyboard(chatId, "📚 *Доступные курсы:*", keyboardRows);
     }
 }

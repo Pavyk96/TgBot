@@ -21,7 +21,7 @@ public class Module {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title; // Название модуля
+    private String title;
 
     @ManyToOne
     @JoinColumn(name = "course_id", nullable = false)

@@ -18,9 +18,9 @@ public class Lesson {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title; // Название урока
-    private String content; // Описание урока
-    private String fileUrl; // Ссылка на PDF или видео
+    private String title;
+    private String content;
+    private String fileUrl;
 
     @ManyToOne
     @JoinColumn(name = "module_id", nullable = false)
