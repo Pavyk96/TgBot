@@ -21,8 +21,9 @@ public class UserCourse {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User userId;
+    @JoinColumn(name = "chat_id", nullable = false)
+    private User user;
+
 
     @ManyToOne
     @JoinColumn(name = "course_id", nullable = false)

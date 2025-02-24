@@ -49,4 +49,16 @@ public class MessageSender {
 
         sendMessage(sendMessage);
     }
+
+    public void sendKeyboard(long chatId, List<KeyboardRow> buttons) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+
+        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+        keyboardMarkup.setKeyboard(buttons);
+        sendMessage.setReplyMarkup(keyboardMarkup);
+
+        sendMessage(sendMessage);
+    }
+
 }

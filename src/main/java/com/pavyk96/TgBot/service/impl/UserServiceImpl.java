@@ -17,50 +17,45 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll(); // Возвращаем всех пользователей из базы
+        return userRepository.findAll();
     }
 
     @Override
     public User getUserById(Long id) {
         return userRepository.findById(id)
-                .orElseGet(() -> createNewUser(id)); // Если не найдено, создаем нового пользователя
+                .orElseGet(() -> createNewUser(id));
     }
 
     @Override
     public User createUser(User user) {
-        return userRepository.save(user); // Сохраняем нового пользователя
+        return userRepository.save(user);
     }
 
     @Override
     public User updateUserById(Long id, User user) {
         if (!userRepository.existsById(id)) {
-            return null; // Если пользователя нет, возвращаем null
+            return null;
         }
         user.setChatId(id);
-        return userRepository.save(user); // Обновляем пользователя
+        return userRepository.save(user);
     }
 
     @Override
     public void deleteUserById(Long id) {
-        userRepository.deleteById(id); // Удаляем пользователя по ID
+        userRepository.deleteById(id);
     }
 
     @Override
     public User getUserByChatId(Long chatId) {
         return userRepository.findById(chatId)
-                .orElseGet(() -> createNewUser(chatId)); // Если не найдено, создаем нового
+                .orElseGet(() -> createNewUser(chatId));
     }
 
     private User createNewUser(Long chatId) {
-        // Создаем нового пользователя с chatId и пустыми полями
         User user = User.builder()
                 .chatId(chatId)
-                .firstName(null)
-                .lastName(null)
-                .username(null)
-                .isAlert(null) // Поля могут быть null
                 .build();
 
-        return userRepository.save(user); // Сохраняем нового пользователя в базе
+        return userRepository.save(user);
     }
 }

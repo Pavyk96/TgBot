@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "courses")
+@Table(name = "users")
 @Data
 @Builder
 @AllArgsConstructor
@@ -17,12 +17,13 @@ public class User {
     @Id
     private Long chatId;
 
-    private Long userId;
-    private String firstName;
-    private String lastName;
-    private String username;
-    private Boolean isAlert;
+//    private Long userId;
+//    private String firstName;
+//    private String lastName;
+//    private String username;
+//    private Boolean isAlert;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private Set<UserCourse> enrolledCourses = new HashSet<>();
 }
