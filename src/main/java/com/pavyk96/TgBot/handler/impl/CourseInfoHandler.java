@@ -2,7 +2,11 @@ package com.pavyk96.TgBot.handler.impl;
 
 import com.pavyk96.TgBot.handler.CommandHandler;
 import com.pavyk96.TgBot.models.Course;
+import com.pavyk96.TgBot.models.User;
+import com.pavyk96.TgBot.models.UserCourse;
 import com.pavyk96.TgBot.service.CourseService;
+import com.pavyk96.TgBot.service.UserCourseService;
+import com.pavyk96.TgBot.service.UserService;
 import com.pavyk96.TgBot.utils.MessageSender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +21,8 @@ import java.util.List;
 public class CourseInfoHandler implements CommandHandler {
 
     private final CourseService courseService;
+    private final UserService userService;
+    private final UserCourseService userCourseService;
     private final MessageSender messageSender;
 
     @Override
@@ -39,11 +45,19 @@ public class CourseInfoHandler implements CommandHandler {
             return;
         }
 
+        User user = userService.getUserByChatId(chatId);
+        boolean isEnrolled = userCourseService.getUserCourse(user.getChatId(), course.getId()) != null;
+
         String courseInfo = "*Курс:* " + course.getTitle() + "\n\n" + course.getDescription();
 
         KeyboardRow row = new KeyboardRow();
         row.add(new KeyboardButton("⬅ Назад к курсам"));
-        row.add(new KeyboardButton("✅ Записаться на курс " + courseTitle));
+
+        if (isEnrolled) {
+            row.add(new KeyboardButton("📖 Перейти к курсу"));
+        } else {
+            row.add(new KeyboardButton("✅ Записаться на курс " + courseTitle));
+        }
 
         List<KeyboardRow> keyboard = List.of(row);
 

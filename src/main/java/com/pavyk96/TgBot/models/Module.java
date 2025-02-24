@@ -28,6 +28,7 @@ public class Module {
     private Course course;
 
     @OneToMany(mappedBy = "module", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<Lesson> lessons = new ArrayList<>();
 }
 
