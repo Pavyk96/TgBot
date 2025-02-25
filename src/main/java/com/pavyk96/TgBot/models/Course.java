@@ -26,7 +26,6 @@ public class Course {
     private String imageUrl;
     private boolean active;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Builder.Default
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Module> modules = new ArrayList<>();
 }

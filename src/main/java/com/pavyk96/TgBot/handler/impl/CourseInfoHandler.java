@@ -54,7 +54,7 @@ public class CourseInfoHandler implements CommandHandler {
         row.add(new KeyboardButton("⬅ Назад к курсам"));
 
         if (isEnrolled) {
-            row.add(new KeyboardButton("📖 Перейти к курсу"));
+            row.add(new KeyboardButton("📖 Перейти к курсу " + courseTitle));
         } else {
             row.add(new KeyboardButton("✅ Записаться на курс " + courseTitle));
         }

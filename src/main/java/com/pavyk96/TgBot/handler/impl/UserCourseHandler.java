@@ -9,7 +9,6 @@ import com.pavyk96.TgBot.service.UserCourseService;
 import com.pavyk96.TgBot.service.UserService;
 import com.pavyk96.TgBot.utils.MessageSender;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
